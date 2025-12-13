@@ -318,6 +318,22 @@ footer {
   z-index: -1;
 }
 
+    .footer-links {
+  margin-top: 12px;
+}
+
+.footer-links a {
+  color: var(--gold-1);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--gold-2);
+  text-shadow: 0 0 10px rgba(255, 215, 120, 0.6);
+}
+
     
   </style>
 </head>
@@ -376,6 +392,9 @@ footer {
 
   <footer>
     © 2025 Gold Hub. All rights reserved.
+    <div class="footer-links">
+    <a href="https://discord.gg/YOUR_INVITE_CODE" target="_blank">Join our Discord</a>
+  </div>
   </footer>
 
 </body>
