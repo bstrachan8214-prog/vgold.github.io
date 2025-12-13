@@ -305,6 +305,19 @@ footer {
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; }
     }
+
+    body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,215,120,.08), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,215,120,.06), transparent 45%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+    
   </style>
 </head>
 <body>
