@@ -337,6 +337,49 @@ footer {
     
   </style>
 </head>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  remove,
+  onDisconnect
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// unique user id for this session
+const userId = crypto.randomUUID();
+
+// mark user as online
+const userRef = ref(db, `presence/users/${userId}`);
+set(userRef, true);
+
+// auto-remove on disconnect
+onDisconnect(userRef).remove();
+
+// listen to online count
+const usersRef = ref(db, "presence/users");
+onValue(usersRef, (snapshot) => {
+  const count = snapshot.exists()
+    ? Object.keys(snapshot.val()).length
+    : 0;
+
+  document.getElementById("players-count").textContent =
+    count.toLocaleString();
+});
+</script>
+
 <body>
 
   <header>
@@ -359,7 +402,11 @@ footer {
     <div class="hero-card">
       <h3>Live Platform Stats</h3>
       <div class="stat"><span>Games Available</span><strong>128</strong></div>
-      <div class="stat"><span>Players Online</span><strong>2,413</strong></div>
+      <div class="stat">
+  <span>Players Online</span>
+  <strong id="players-count">--</strong>
+</div>
+
       <div class="stat"><span>Uptime</span><strong>99.9%</strong></div>
     </div>
   </section>
