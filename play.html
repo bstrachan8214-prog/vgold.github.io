@@ -317,11 +317,20 @@
           <button class="play">Play</button>
         `;
 
-        card.querySelector('.play').addEventListener('click', () => {
-          iframe.removeAttribute('srcdoc'); // CRITICAL
-          iframe.src = game.src;             // REAL URL
-          overlay.style.display = 'flex';
-        });
+card.querySelector('.play').addEventListener('click', async () => {
+  overlay.style.display = 'flex'; // show overlay immediately
+
+  try {
+    const res = await fetch(game.src); // fetch HTML from jsDelivr
+    if (!res.ok) throw new Error('Failed to load game');
+    const html = await res.text();      // get raw HTML
+    iframe.srcdoc = html;               // inject into iframe
+  } catch (err) {
+    iframe.srcdoc = `<p style="color:red">Failed to load game</p>`;
+    console.error(err);
+  }
+});
+
 
         gameList.appendChild(card);
       });
