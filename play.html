@@ -110,16 +110,18 @@ fetch('/data/games.json')
         <button class="play">Play</button>
       `;
 
-      const playBtn = card.querySelector('.play');
-      playBtn.addEventListener('click', () => {
-        if (game.unity) {
-          // UNITY WEBGL GAME LOADER
-          openUnityGame(game.src);
-        } else {
-          // NORMAL HTML5 GAME
-          iframe.srcdoc = `<iframe src="${game.src}" style="width:100%;height:100%;border:none;"></iframe>`;
-          overlay.style.display = 'flex';
-        }
+card.querySelector('.play').addEventListener('click', () => {
+  if (game.unity) {
+    // Load Unity build directly
+    iframe.src = game.src;  // URL to jsDelivr index.html
+    overlay.style.display = 'flex';
+  } else {
+    // Normal HTML5 games
+    iframe.srcdoc = `<iframe src="${game.src}" style="width:100%;height:100%;border:none;"></iframe>`;
+    overlay.style.display = 'flex';
+  }
+});
+
       });
 
       gameList.appendChild(card);
