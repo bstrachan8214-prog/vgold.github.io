@@ -120,12 +120,11 @@
 
     /* ===== GAMES GRID ===== */
     .games {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 42px;
-      max-width: 1200px;
-      margin: auto;
-      align-items: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 42px;
+  align-items: start;
+  grid-auto-rows: max-content;
     }
 
     .game {
