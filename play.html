@@ -316,20 +316,28 @@
           <h3>${game.name}</h3>
           <button class="play">Play</button>
         `;
-
 card.querySelector('.play').addEventListener('click', async () => {
-  overlay.style.display = 'flex'; // show overlay immediately
+  overlay.style.display = 'flex';
 
   try {
-    const res = await fetch(game.src); // fetch HTML from jsDelivr
-    if (!res.ok) throw new Error('Failed to load game');
-    const html = await res.text();      // get raw HTML
-    iframe.srcdoc = html;               // inject into iframe
+    const res = await fetch(game.src);
+    if (!res.ok) throw new Error('Failed to load game HTML');
+    let html = await res.text();
+
+    // Replace all relative paths with absolute ones
+    html = html.replace(/(src|href|dataUrl|frameworkUrl|codeUrl)\s*=\s*["'](?!https?:\/\/)([^"']+)["']/g, (m, attr, path) => {
+      return `${attr}="${baseURL}${path}"`;
+    });
+
+    // Inject HTML into iframe
+    iframe.srcdoc = html;
+
   } catch (err) {
     iframe.srcdoc = `<p style="color:red">Failed to load game</p>`;
     console.error(err);
   }
 });
+
 
 
         gameList.appendChild(card);
