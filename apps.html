@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vertex Gold – Play</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0d0d0d;
+      --panel-soft: #131313;
+      --gold-1: #ffe08a;
+      --gold-2: #ffbf3f;
+      --gold-3: #cfa335;
+      --text: #f5f5f5;
+      --muted: #9b9b9b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Inter, sans-serif; }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(900px 500px at 20% -10%, rgba(255,200,90,.15), transparent 60%),
+        radial-gradient(900px 500px at 80% 0%, rgba(255,200,90,.12), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(5,5,5,.7);
+      border-bottom: 1px solid rgba(255,215,120,.12);
+    }
+
+    .nav {
+      max-width: 1300px;
+      margin: auto;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+      background: linear-gradient(120deg, #fff, var(--gold-1), #fff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 6s linear infinite;
+    }
+
+    .nav a button {
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-3));
+      border: none;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 0 35px rgba(255,215,120,.45);
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .nav a button:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 65px rgba(255,215,120,.8);
+    }
+
+    /* ===== PAGE ===== */
+    .section {
+      max-width: 1300px;
+      margin: auto;
+      padding: 90px 28px 110px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 3.6rem);
+      margin-bottom: 36px;
+      font-weight: 900;
+      background: linear-gradient(120deg, #fff, var(--gold-1));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .search-bar {
+      max-width: 420px;
+      margin: 0 auto 60px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,215,120,.35);
+      background: var(--panel);
+      color: var(--text);
+      font-size: 1.05rem;
+      outline: none;
+      box-shadow: inset 0 0 0 rgba(0,0,0,0);
+      transition: border .2s, box-shadow .2s;
+    }
+
+    .search-bar input:focus {
+      border-color: var(--gold-1);
+      box-shadow: 0 0 25px rgba(255,215,120,.35);
+    }
+
+    /* ===== GAMES GRID ===== */
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 42px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .game {
+      background: linear-gradient(180deg, #1a1306, #0b0b0b);
+      border-radius: 30px;
+      padding: 22px 22px 26px;
+      border: 1px solid rgba(255,215,120,.18);
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,215,140,.25), transparent 65%);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+    }
+
+    .game:hover {
+      transform: translateY(-12px) scale(1.04);
+      box-shadow:
+        0 30px 70px rgba(0,0,0,.9),
+        0 0 80px rgba(255,215,120,.45);
+    }
+
+    .game:hover::before { opacity: 1; }
+
+    .thumb {
+      width: 100%;
+      height: 170px;
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      box-shadow: 0 0 30px rgba(255,215,120,.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .game:hover .thumb img { transform: scale(1.08); }
+
+    .game h3 {
+      margin-bottom: 16px;
+      color: var(--gold-1);
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .play {
+      margin-top: auto;
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-3));
+      border: none;
+      padding: 14px;
+      border-radius: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(255,215,120,.45);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 55px rgba(255,215,120,.75);
+    }
+
+    /* ===== IFRAME OVERLAY ===== */
+    .iframe-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.96);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .iframe-controls {
+      margin-bottom: 14px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .iframe-controls button {
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-3));
+      border: none;
+      padding: 10px 20px;
+      border-radius: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #000;
+      box-shadow: 0 0 25px rgba(255,215,120,.45);
+    }
+
+    .iframe-overlay iframe {
+      width: 92%;
+      height: 90%;
+      border: none;
+      border-radius: 18px;
+      background: #000;
+    }
+
+    @keyframes shine { to { background-position: 200% center; } }
+
+    @media (max-width: 900px) {
+      .section { padding-top: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">VERTEX GOLD</div>
+    <div style="display:flex; gap:14px;">
+      <a href="index.html"><button>Hub</button></a>
+      <a href="play.html"><button>Games</button></a>
+      <a href="apps.html"><button>Apps</button></a>
+      <a href="unlocker.html"><button>Unlocker</button></a>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <h1>Select a Game</h1>
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Search games...">
+  </div>
+
+  <div class="games" id="gameList"></div>
+</section>
+
+<div class="iframe-overlay" id="iframeOverlay">
+  <div class="iframe-controls">
+    <button id="closeBtn">Close ✕</button>
+    <button id="fullscreenBtn">Fullscreen ⛶</button>
+  </div>
+  <iframe id="gameFrame" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+</div>
+
+<script>
+  const searchInput = document.getElementById('search');
+  const gameList = document.getElementById('gameList');
+  const overlay = document.getElementById('iframeOverlay');
+  const iframe = document.getElementById('gameFrame');
+  const closeBtn = document.getElementById('closeBtn');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+  fetch('/data/games.json')
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(game => {
+        const card = document.createElement('div');
+        card.className = 'game';
+        card.dataset.name = game.name;
+        card.innerHTML = `
+          <div class="thumb"><img src="${game.image}" alt="${game.name}"></div>
+          <h3>${game.name}</h3>
+          <button class="play">Play</button>
+        `;
+        gameList.appendChild(card);
+
+        card.querySelector('.play').addEventListener('click', () => {
+          iframe.srcdoc = '';
+          fetch(game.src).then(r => r.text()).then(html => iframe.srcdoc = html);
+          overlay.style.display = 'flex';
+        });
+      });
+    });
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase();
+    document.querySelectorAll('.game').forEach(g => {
+      g.style.display = g.dataset.name?.toLowerCase().includes(q) ? 'block' : 'none';
+    });
+  });
+
+  closeBtn.onclick = () => { overlay.style.display = 'none'; iframe.srcdoc = ''; };
+
+  fullscreenBtn.onclick = () => {
+    const el = iframe;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+  };
+
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) { overlay.style.display = 'none'; iframe.srcdoc = ''; }
+  });
+</script>
+
+</body>
+</html>
