@@ -110,16 +110,39 @@
       margin: auto;
     }
 
-    .game {
-      background: linear-gradient(180deg, #1a1306, #0b0b0b);
-      border-radius: 30px;
-      padding: 22px 22px 26px;
-      border: 1px solid rgba(255,215,120,.18);
-      position: relative;
-      overflow: hidden;
-      transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
-      display: block;
-    }
+.game {
+  background: linear-gradient(180deg, #1a1306, #0b0b0b);
+  border-radius: 30px;
+  padding: 22px 22px 26px;
+  border: 1px solid rgba(255,215,120,.18);
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;
+  display: block;
+}
+
+/* ===== Hover Glow ===== */
+.game::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,215,120,0.25), transparent 70%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+
+.game:hover::before {
+  opacity: 1;
+}
+
+.game:hover {
+  transform: translateY(-12px) scale(1.04);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.9),
+    0 0 60px rgba(255,215,120,.45);
+}
+
 
     .thumb {
       width: 100%;
