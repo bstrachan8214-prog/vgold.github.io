@@ -297,47 +297,64 @@
   const fullscreenBtn = document.getElementById('fullscreenBtn');
 
   fetch('/data/games.json')
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('games.json failed to load');
+      return res.json();
+    })
     .then(data => {
+      gameList.innerHTML = '';
+
       data.forEach(game => {
         const card = document.createElement('div');
         card.className = 'game';
         card.dataset.name = game.name;
+
         card.innerHTML = `
-          <div class="thumb"><img src="${game.image}" alt="${game.name}"></div>
+          <div class="thumb">
+            <img src="${game.image}" alt="${game.name}">
+          </div>
           <h3>${game.name}</h3>
           <button class="play">Play</button>
         `;
-        gameList.appendChild(card);
 
-card.querySelector('.play').addEventListener('click', () => {
-  iframe.removeAttribute("srcdoc"); // IMPORTANT
-  iframe.src = game.src;            // REAL document load
-  overlay.style.display = 'flex';
-});
-
+        card.querySelector('.play').addEventListener('click', () => {
+          iframe.removeAttribute('srcdoc'); // CRITICAL
+          iframe.src = game.src;             // REAL URL
+          overlay.style.display = 'flex';
         });
+
+        gameList.appendChild(card);
       });
+    })
+    .catch(err => {
+      console.error(err);
+      gameList.innerHTML =
+        '<p style="color:red;font-weight:700">Failed to load games.</p>';
     });
 
   searchInput.addEventListener('input', () => {
     const q = searchInput.value.toLowerCase();
     document.querySelectorAll('.game').forEach(g => {
-      g.style.display = g.dataset.name?.toLowerCase().includes(q) ? 'block' : 'none';
+      g.style.display = g.dataset.name.toLowerCase().includes(q)
+        ? 'block'
+        : 'none';
     });
   });
 
-  closeBtn.onclick = () => { overlay.style.display = 'none'; iframe.srcdoc = ''; };
+  closeBtn.onclick = () => {
+    overlay.style.display = 'none';
+    iframe.src = '';
+  };
 
   fullscreenBtn.onclick = () => {
-    const el = iframe;
-    if (el.requestFullscreen) el.requestFullscreen();
-    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    if (iframe.requestFullscreen) iframe.requestFullscreen();
   };
 
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) { overlay.style.display = 'none'; iframe.srcdoc = ''; }
+    if (e.target === overlay) {
+      overlay.style.display = 'none';
+      iframe.src = '';
+    }
   });
 </script>
 
