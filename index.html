@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vertex Gold</title>
   <link rel="icon" type="image/png" href="images/favicon.png">
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
@@ -32,6 +31,7 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      position: relative;
     }
 
     header {
@@ -82,6 +82,8 @@
       grid-template-columns: 1.15fr .85fr;
       gap: 70px;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -115,6 +117,12 @@
       border-radius: 16px;
       cursor: pointer;
       box-shadow: 0 0 45px rgba(255,215,120,.55);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 60px rgba(255,215,120,0.75), 0 0 120px rgba(255,215,120,0.3);
     }
 
     .btn-outline {
@@ -179,6 +187,16 @@
       text-align: center;
       color: #888;
       font-size: .9rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Particles canvas */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
     }
 
     @keyframes shine { to { background-position: 200% center; } }
@@ -187,6 +205,8 @@
 </head>
 
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>
   <div class="nav">
@@ -221,6 +241,7 @@
 <footer>
   © 2025 Ore Gaming. All rights reserved.
 </footer>
+
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -254,31 +275,125 @@
   });
 
   function cloakTab() {
-  // Attempt to open Wikipedia
-  const wikiTab = window.open("https://en.wikipedia.org", "_blank");
+    const wikiTab = window.open("https://en.wikipedia.org", "_blank");
+    if (wikiTab) {
+      setTimeout(() => {
+        const cloakTab = window.open("about:blank", "_blank");
+        if (cloakTab) {
+          cloakTab.document.write(`
+            <style>html,body{margin:0;padding:0;height:100%;overflow:hidden;}iframe{border:none;width:100%;height:100%;}</style>
+            <iframe src="${window.location.href}"></iframe>
+          `);
+          cloakTab.document.close();
+        }
+      }, 400);
+    } else {
+      alert("Please allow pop-ups to use Cloak Tab.");
+    }
+  }
+</script>
 
-  if (wikiTab) {
-    // Pop-ups allowed
-    setTimeout(() => {
-      const cloakTab = window.open("about:blank", "_blank");
-      if (cloakTab) {
-        // Write an iframe into the new tab showing your site
-        cloakTab.document.write(`
-          <style>html,body{margin:0;padding:0;height:100%;overflow:hidden;}iframe{border:none;width:100%;height:100%;}</style>
-          <iframe src="${window.location.href}"></iframe>
-        `);
-        cloakTab.document.close();
+<script>
+// ===== Networked particles with mouse interaction =====
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+let particlesArray = [];
+const particleCount = 80;
+const lineDistance = 120;
+let mouse = { x: null, y: null };
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+canvas.addEventListener('mousemove', e => {
+  mouse.x = e.x;
+  mouse.y = e.y;
+});
+
+canvas.addEventListener('mouseleave', () => {
+  mouse.x = null;
+  mouse.y = null;
+});
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 1;
+    this.speedX = (Math.random() - 0.5) * 0.5;
+    this.speedY = (Math.random() - 0.5) * 0.5;
+    this.color = 'rgba(255,200,90,0.2)';
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+    // Move slightly toward mouse
+    if (mouse.x && mouse.y) {
+      const dx = mouse.x - this.x;
+      const dy = mouse.y - this.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 100) {
+        this.x -= dx*0.005;
+        this.y -= dy*0.005;
       }
-    }, 400); // 0.4 seconds delay
-  } else {
-    // Pop-ups blocked
-    alert("Please allow pop-ups to use Cloak Tab.");
+    }
+  }
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fill();
   }
 }
-</script>
-  
+
+function connectParticles() {
+  for (let a = 0; a < particlesArray.length; a++) {
+    for (let b = a + 1; b < particlesArray.length; b++) {
+      const dx = particlesArray[a].x - particlesArray[b].x;
+      const dy = particlesArray[a].y - particlesArray[b].y;
+      const distance = Math.sqrt(dx*dx + dy*dy);
+      if (distance < lineDistance) {
+        ctx.strokeStyle = `rgba(255,200,90,${1 - distance/lineDistance} )`;
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function initParticles() {
+  particlesArray = [];
+  for (let i = 0; i < particleCount; i++) {
+    particlesArray.push(new Particle());
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  connectParticles();
+  requestAnimationFrame(animateParticles);
+}
+
+initParticles();
+animateParticles();
 </script>
 
-  
 </body>
 </html>
+
