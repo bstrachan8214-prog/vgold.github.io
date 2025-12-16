@@ -7,6 +7,9 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.min.js"></script>
+
   <style>
     :root {
       --bg: #050505;
@@ -23,6 +26,8 @@
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      position: relative;
+      z-index: 1;
     }
 
     header {
@@ -74,6 +79,8 @@
       margin: auto;
       padding: 90px 28px 110px;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -223,12 +230,16 @@
       background: #000;
     }
 
+    #particles-js { position: fixed; inset: 0; z-index: 0; }
+
     @keyframes shine { to { background-position: 200% center; } }
     @media (max-width: 900px) { .section { padding-top: 70px; } }
   </style>
 </head>
 
 <body>
+
+<div id="particles-js"></div>
 
 <header>
   <div class="nav">
@@ -272,7 +283,6 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // ---- TRACK CONNECTIONS (for players online count) ----
   const connectionsRef = db.ref("connections");
   const connectedRef = db.ref(".info/connected");
 
@@ -292,12 +302,10 @@ const iframe = document.getElementById('gameFrame');
 const closeBtn = document.getElementById('closeBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
-// Fetch games.json
 fetch('https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/main/data/games.json')
   .then(res => res.json())
   .then(data => {
     gameList.innerHTML = '';
-
     data.forEach(game => {
       const card = document.createElement('div');
       card.className = 'game';
@@ -332,7 +340,6 @@ fetch('https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/main/data/games
     });
   });
 
-// Search/filter
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.toLowerCase();
   document.querySelectorAll('.game').forEach(g => {
@@ -340,7 +347,6 @@ searchInput.addEventListener('input', () => {
   });
 });
 
-// Overlay controls
 closeBtn.onclick = () => {
   overlay.style.display = 'none';
   iframe.src = '';
@@ -357,6 +363,26 @@ overlay.addEventListener('click', e => {
     iframe.src = '';
     iframe.srcdoc = '';
   }
+});
+</script>
+
+<script>
+tsParticles.load("particles-js", {
+  background: { color: "transparent" },
+  fpsLimit: 60,
+  particles: {
+    number: { value: 50, density: { enable: true, area: 800 } },
+    color: { value: "#ffe08a" },
+    shape: { type: "circle" },
+    opacity: { value: 0.4, random: true },
+    size: { value: 2, random: true },
+    move: { enable: true, speed: 0.8, direction: "none", random: true, straight: false, outModes: "out" }
+  },
+  interactivity: {
+    events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } },
+    modes: { repulse: { distance: 100 }, push: { quantity: 4 } }
+  },
+  detectRetina: true
 });
 </script>
 
