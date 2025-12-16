@@ -29,20 +29,20 @@
       position: relative;
     }
 
-    /* Particles background */
+    /* Particles container */
     #particles-js {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
     }
 
     /* Content above particles */
     header, .section, .iframe-overlay {
       position: relative;
-      z-index: 2;
+      z-index: 1;
     }
 
     header {
@@ -250,6 +250,7 @@
 
 <body>
 
+<!-- Particles container -->
 <div id="particles-js"></div>
 
 <header>
@@ -293,10 +294,8 @@
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
-
   const connectionsRef = db.ref("connections");
   const connectedRef = db.ref(".info/connected");
-
   connectedRef.on("value", snap => {
     if (snap.val() === true) {
       const con = connectionsRef.push(true);
@@ -321,13 +320,11 @@ fetch('https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/main/data/games
       const card = document.createElement('div');
       card.className = 'game';
       card.dataset.name = game.name;
-
       card.innerHTML = `
         <div class="thumb"><img src="${game.image}" alt="${game.name}"></div>
         <h3>${game.name}</h3>
         <button class="play">Play</button>
       `;
-
       const playBtn = card.querySelector('.play');
       playBtn.addEventListener('click', () => {
         overlay.style.display = 'flex';
@@ -346,7 +343,6 @@ fetch('https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/main/data/games
             doc.close();
           });
       });
-
       gameList.appendChild(card);
     });
   });
@@ -382,17 +378,13 @@ tsParticles.load("particles-js", {
   background: { color: "transparent" },
   fpsLimit: 60,
   particles: {
-    number: { value: 60, density: { enable: true, area: 800 } },
+    number: { value: 50, density: { enable: true, area: 800 } },
     color: { value: "#ffe08a" },
     shape: { type: "circle" },
-    opacity: { value: 0.9, random: true },
-    size: { value: 4, random: { enable: true, minimumValue: 2 } },
-    move: { enable: true, speed: 0.6, random: true, straight: false, outModes: "out" },
-    shadow: { enable: true, color: "#ffe08a", blur: 10 }
-  },
-  interactivity: {
-    events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } },
-    modes: { repulse: { distance: 100 }, push: { quantity: 4 } }
+    opacity: { value: 0.9 },
+    size: { value: 4 },
+    move: { enable: true, speed: 0.5, random: true, straight: false, outModes: "out" },
+    shadow: { enable: true, color: "#ffe08a", blur: 12 }
   },
   detectRetina: true
 });
