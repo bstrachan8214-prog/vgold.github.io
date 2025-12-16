@@ -27,7 +27,20 @@
       color: var(--text);
       overflow-x: hidden;
       position: relative;
-      z-index: 1;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    header, .section, .iframe-overlay {
+      position: relative;
+      z-index: 2;
     }
 
     header {
@@ -79,8 +92,6 @@
       margin: auto;
       padding: 90px 28px 110px;
       text-align: center;
-      position: relative;
-      z-index: 2;
     }
 
     h1 {
@@ -230,8 +241,6 @@
       background: #000;
     }
 
-    #particles-js { position: fixed; inset: 0; z-index: 0; }
-
     @keyframes shine { to { background-position: 200% center; } }
     @media (max-width: 900px) { .section { padding-top: 70px; } }
   </style>
@@ -371,12 +380,13 @@ tsParticles.load("particles-js", {
   background: { color: "transparent" },
   fpsLimit: 60,
   particles: {
-    number: { value: 50, density: { enable: true, area: 800 } },
+    number: { value: 60, density: { enable: true, area: 800 } },
     color: { value: "#ffe08a" },
     shape: { type: "circle" },
-    opacity: { value: 0.4, random: true },
-    size: { value: 2, random: true },
-    move: { enable: true, speed: 0.8, direction: "none", random: true, straight: false, outModes: "out" }
+    opacity: { value: 0.5, random: true },
+    size: { value: 3, random: { enable: true, minimumValue: 1 } },
+    move: { enable: true, speed: 0.8, direction: "none", random: true, straight: false, outModes: "out" },
+    shadow: { enable: true, color: "#ffe08a", blur: 6 }
   },
   interactivity: {
     events: { onHover: { enable: true, mode: "repulse" }, onClick: { enable: true, mode: "push" } },
