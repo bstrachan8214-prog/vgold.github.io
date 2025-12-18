@@ -31,6 +31,7 @@
       try {
         // Attempt to check iframe's location (only works for same-origin)
         if (iframe.contentWindow.location.href !== fixedURL) {
+          wait(3)
           iframe.src = fixedURL;
         }
       } catch (e) {
