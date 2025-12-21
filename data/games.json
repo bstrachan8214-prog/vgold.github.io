@@ -1,7 +1,7 @@
 [
   {
     "name": "[!] REQUEST GAME",
-    "src": "/local/request.html",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/request.html",
     "image": "https://workforceedtech.org/wp-content/uploads/2019/03/google-forms-logo.jpg",
     "description": "Game Active"
   },
