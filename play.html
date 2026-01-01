@@ -277,7 +277,6 @@
   </div>
   <iframe id="gameFrame" allow="fullscreen; autoplay; gamepad; pointer-lock"></iframe>
 </div>
-
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -309,10 +308,31 @@ const iframe = document.getElementById('gameFrame');
 const closeBtn = document.getElementById('closeBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
+// ----- PRIORITY GAMES (change names to your VIP list) -----
+const priorityGames = [
+  "[!] REQUEST GAME",
+  "Roblox",
+  "Fortnite",
+  "Hollow Knight"
+];
+
+// Fetch and display games
 fetch('data/games.json')
   .then(res => res.json())
   .then(data => {
     gameList.innerHTML = '';
+
+    // Sort games: priority first, then alphabetical
+    data.sort((a, b) => {
+      const aIndex = priorityGames.indexOf(a.name);
+      const bIndex = priorityGames.indexOf(b.name);
+
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex; // both priority
+      if (aIndex !== -1) return -1; // only a is priority
+      if (bIndex !== -1) return 1;  // only b is priority
+      return a.name.localeCompare(b.name); // neither priority → alphabetical
+    });
+
     data.forEach(game => {
       const card = document.createElement('div');
       card.className = 'game';
@@ -344,6 +364,7 @@ fetch('data/games.json')
     });
   });
 
+// Search functionality
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.toLowerCase();
   document.querySelectorAll('.game').forEach(g => {
@@ -351,6 +372,7 @@ searchInput.addEventListener('input', () => {
   });
 });
 
+// Overlay controls
 closeBtn.onclick = () => {
   overlay.style.display = 'none';
   iframe.src = '';
@@ -369,7 +391,6 @@ overlay.addEventListener('click', e => {
   }
 });
 </script>
-
 <script>
 // ===== Networked particles with mouse interaction =====
 const canvas = document.getElementById("particles");
