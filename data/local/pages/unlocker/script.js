@@ -17,14 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
         "https://helios-browser.rf.gd",
         "https://helios-browser.w3spaces.com/",
         "https://helios-browser.pages.dev/",
-        "https://helios-browser.ct.ws",
+        "https://helios-browser.ct.ws"
     ];
-
-    const warnedUrlComponents = [
-        "localhost:",
-        "127.0.0.1",
-        ".app.github.dev"
-    ]
 
     function normalizeUrl(url) {
         return url.split("#")[0].split("?")[0]; // Remove hash and query params
@@ -74,22 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("DEBUG: Official Helios URL detected.");
                 iconElement.classList.add("fa", "fa-circle-check", "sitechecker-secure");
                 messageElement.innerHTML = `This link <b>(${pageUrl})</b> is a secure, official Helios Browser link.`;
-            } else if (warnedUrlComponents.some(entry => pageUrl.includes(entry))) {
-                console.log("DEBUG: Development Helios URL detected.");
-                iconElement.classList.add(
-                  "fa",
-                  "fa-triangle-exclamation",
-                  "sitechecker-warning2"
-                );
-                messageElement.innerHTML = `This link <b>(${pageUrl})</b> seems to be a development URL. If this was set up by you, then you can continue. Otherwise, we recommend using an official link which can be found <a href="https://github.com/dinguschan-owo/Helios/blob/main/README.md" target="_blank" class="sitechecker-link">here</a>.`;
-            } else if (pageUrl.includes("file:///")) {
-                console.log("DEBUG: Local (File) Helios URL detected.");
-                iconElement.classList.add(
-                  "fa",
-                  "fa-triangle-exclamation",
-                  "sitechecker-warning2"
-                );
-                messageElement.innerHTML = `This link is a local file. Keep in mind this could have been modified, so use at your own risk. Be sure to use official offline builds for the best experience.`;
             } else {
                 console.log("DEBUG: UNOFFICIAL URL detected!");
                 iconElement.classList.add("fa", "fa-triangle-exclamation", "sitechecker-warning");
@@ -100,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 200); 
     }
 
-    function fadeOutSitechecker() {
+function fadeOutSitechecker() {
         setTimeout(() => {
             let sitecheckerContainer = document.querySelector(".sitechecker-container");
             if (sitecheckerContainer) {
@@ -109,10 +87,65 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log("DEBUG: Sitechecker is fading out.");
             }
         }, 20000); 
-    } 
+    }
 
-    // Create Sitechecker once on initial page load
-    createSitechecker();
+function createCenterSitechecker() {
+        // Check if center Sitechecker already exists
+        let centerSitecheckerContainer = document.querySelector(".sitechecker-container-center");
+        let backdrop = document.querySelector(".sitechecker-backdrop");
+        
+        if (!centerSitecheckerContainer) {
+            // Create backdrop
+            backdrop = document.createElement("div");
+            backdrop.classList.add("sitechecker-backdrop");
+            document.body.appendChild(backdrop);
+            
+            // Create center sitechecker
+            centerSitecheckerContainer = document.createElement("div");
+            centerSitecheckerContainer.classList.add("sitechecker-container-center");
+
+            centerSitecheckerContainer.innerHTML = `
+                <div class="nautilus-icon">
+                    <i class="fa-solid fa-fish"></i>
+                </div>
+                <h2>Announcing NautilusOS!!</h2>
+                <p id="sitechecker-center-text">Hey there! dinguschan speaking! I'm excited to introduce the brand-new <strong>𝘕𝘢𝘶𝘵𝘪𝘭𝘶𝘴𝘖𝘚</strong> - a fully functional web operating system developed alongside x8rr and lanefiedler731-gif. Experience games, apps, themes, cloaking, settings, and 3 whole proxy browsers built right in (including Helios, if you'd ever wanna use it lol), all in your browser! Check it out now!</p>
+                <div class="sitechecker-button-container">
+                    <button class="sitechecker-close">Maybe later</button>
+                    <button class="sitechecker-visit">Take me there!</button>
+                </div>
+            `;
+
+            document.body.appendChild(centerSitecheckerContainer);
+            console.log("DEBUG: Center Sitechecker added to the body.");
+
+            // Show the backdrop and center sitechecker
+            backdrop.style.display = "block";
+            centerSitecheckerContainer.style.display = "block";
+
+            // Add close button functionality
+            const closeButton = centerSitecheckerContainer.querySelector(".sitechecker-close");
+            closeButton.addEventListener("click", function() {
+                centerSitecheckerContainer.style.display = "none";
+                backdrop.style.display = "none";
+                // Show the original sitechecker after closing the popup
+                createSitechecker();
+            });
+
+            // Add visit button functionality
+            const visitButton = centerSitecheckerContainer.querySelector(".sitechecker-visit");
+            visitButton.addEventListener("click", function() {
+                window.open("https://github.com/nautilus-os/NautilusOS", "_blank");
+                centerSitecheckerContainer.style.display = "none";
+                backdrop.style.display = "none";
+                // Show the original sitechecker after closing the popup
+                createSitechecker();
+            });
+        }
+    }
+
+    // Create center Sitechecker first (delays the original sitechecker)
+    createCenterSitechecker();
 
     // Ensure Sitechecker remains visible when switching tabs
     document.addEventListener("click", function(event) {
@@ -262,7 +295,7 @@ window.addEventListener('keydown', function(event) {
 // Activate the selected theme preview and apply the corresponding theme
 function activatePreview(element) {
     // Select all theme preview elements
-    const allElements = document.querySelectorAll('.theme-preview, .theme-preview-lightmode, .blue-pre');
+    const allElements = document.querySelectorAll('.theme-preview, .theme-preview-lightmode');
 
     // Remove 'active' class from all elements
     allElements.forEach(el => el.classList.remove('active'));
@@ -276,6 +309,7 @@ function activatePreview(element) {
     } else if (element.classList.contains('theme-preview')) {
         switchTheme('styles.css', 'theme-preview'); // Switch to light theme
     }
+}
 
 // Switch the theme and save the active state to localStorage
 function switchTheme(themeFile, activeClass) {
@@ -761,7 +795,7 @@ const tabs = [{
   <p><i class="fa-brands fa-github"></i></p>
 </div>
         <h23>Vertex Tunnel</h23>
-        <h21>𝚟𝟷.0</h21>
+        <h21>𝚟𝟷.𝟶</h21>
         <div class="search-baraa">
           <div class="search-containeraa">
   <div class="search-engine-dropdownaa" onclick="toggleDropdown(${currentTabIndex})">
