@@ -15,22 +15,10 @@
 - [About the Project](#star2-about-the-project)
 - [Contact](#handshake-contact)
 
-
-## :star2: About the Project
-
 ### :camera: Screenshots
 <div align="center"> <a href="https://mathread.org/"><img src="https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/main/images/Screenshot%202026-01-13%208.13.50%20AM.png" alt='image' width='800'/></a> </div>
-
-
-
-### :art: Color Reference
-| Color | Hex |
-| --------------- | ---------------------------------------------------------------- |
-| Primary Color | ![#908226](https://via.placeholder.com/10/908226?text=+) #908226 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
 
 ## :handshake: Contact
 
 ScramJr (Main Dev) - - fortniteballs9.11@outlook.com
+
