@@ -832,6 +832,12 @@
     "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/313.html",
     "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/313.png",
     "description": "Game Active"
+  },
+  {
+    "name": "Clash Royale",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/clashroyale.html",
+    "image": "https://yt3.googleusercontent.com/Pj9SLzbMxgdbgFSA5MgfTZXjnoRtAj5qUGP8ubjf8AEJpy2nzWLR9Ik__iwQa44bPdvNw5jv5A=s900-c-k-c0x00ffffff-no-rj",
+    "description": "Game Active"
   }
 ]
 
