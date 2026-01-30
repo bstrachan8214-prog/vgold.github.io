@@ -920,7 +920,43 @@
   {
     "name": "Stone Grass Mowing Simulator",
     "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/584.html",
-    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/584.png",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_1kA99hLRGkpJq0emWEKPBQhuLc-8RAeI_g&s",
+    "description": "Game Active"
+  },
+  {
+    "name": "Doge Miner",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/511.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/511.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Slowroads",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/369.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/369.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Superhot",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/233.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/233.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Temple Run 2",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/10.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/10.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "The Impossible Quiz",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/507.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/507.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "The World's Hardest Game",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/103.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/103.png",
     "description": "Game Active"
   }
 ]
