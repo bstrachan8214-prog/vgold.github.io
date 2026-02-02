@@ -986,13 +986,55 @@
   {
     "name": "War The Knights",
     "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/284.html",
-    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/284.png",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShfnRZf79PJ7yqnVgVOEfF-Os2cS6-fLa3Tw&s",
     "description": "Game Active"
   },
   {
     "name": "Slither.io",
     "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/461.html",
     "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/461.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Waterworks!",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/594.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/594.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Stickman and Guns",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/578.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/578.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Undertale Yellow",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/456.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/456.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Station 141",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/452.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/452.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Slender: The 8 Pages",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/451.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/451.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Happy Sheepies",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/351.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/351.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "The Man In The Window",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/459.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/459.png",
     "description": "Game Active"
   }
 ]
