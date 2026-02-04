@@ -1036,5 +1036,53 @@
     "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/459.html",
     "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/459.png",
     "description": "Game Active"
+  },
+  {
+    "name": "3Dash",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/3dash.html",
+    "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3404000/header.jpg",
+    "description": "Game Active"
+  },
+  {
+    "name": "3Dash Editor",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/3dasheditor.html",
+    "image": "https://img.tapimg.net/market/images/8db8b1b29737055c042d4479d9c2c08a.jpg",
+    "description": "Game Active"
+  },
+  {
+    "name": "Call of Duty: Modern Warfare 3",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/codmw3.html",
+    "image": "https://i.guim.co.uk/img/static/sys-images/Technology/Pix/pictures/2011/11/7/1320680882011/Modern-Warfare-3-005.jpg?width=465&dpr=1&s=none&crop=none",
+    "description": "Game Active"
+  },
+  {
+    "name": "CSGO Clicker",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/csgoclicker.html",
+    "image": "https://screenshots.codesandbox.io/tgrhy2/0.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Dino Game",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/dinogame.html",
+    "image": "https://play-lh.googleusercontent.com/5axEtshuGkALUtm0WvoxgXGLz3D6W2M5ukKBFnnhmWkcTLXspgFCVDAWyZiu8DagRkvQ=w526-h296-rw",
+    "description": "Game Active"
+  },
+  {
+    "name": "Fireboy and Watergirl",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/fireboyandwatergirl.html",
+    "image": "https://play-lh.googleusercontent.com/-2f1vEnKIPbVTdSH7j0KLnya8SzOAgZsnuzk-R6BKHr9hSmSm2K9OGJ-ElPHGz7rXg=w526-h296-rw",
+    "description": "Game Active"
+  },
+  {
+    "name": "Infinite Craft",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/infinitecraft.html",
+    "image": "https://static.wikia.nocookie.net/siivagunner/images/9/90/Infinite_Craft.jpg/revision/latest?cb=20250227063007",
+    "description": "Game Active"
+  },
+  {
+    "name": "Slope 3",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/slope3.html",
+    "image": "https://i.ytimg.com/vi/wEAYDFPhvfQ/maxresdefault.jpg",
+    "description": "Game Active"
   }
 ]
