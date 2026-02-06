@@ -205,54 +205,58 @@
       box-shadow: 0 0 55px rgba(255,215,120,.75);
     }
 
-        #iframeContainer {
-  flex: 1;
-  width: 97%;
-  height: 97%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-#iframeContainer iframe {
-  width: 97%;
-  height: 97%;
-  border: none;
-}
-
+    /* --- OVERLAY FIXES --- */
     .iframe-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.96);
+      background: rgba(0,0,0,.98);
       z-index: 999;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
     }
 
+    /* Fixed Controls at the Top */
     .iframe-controls {
-      margin-bottom: 14px;
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      gap: 14px;
+      gap: 16px;
+      z-index: 1000;
     }
 
     .iframe-controls button {
       background: linear-gradient(135deg, var(--gold-1), var(--gold-3));
       border: none;
-      padding: 10px 20px;
-      border-radius: 16px;
+      padding: 10px 24px;
+      border-radius: 14px;
       font-weight: 800;
       cursor: pointer;
       color: #000;
       box-shadow: 0 0 25px rgba(255,215,120,.45);
+      transition: transform 0.2s ease;
     }
 
-    .iframe-overlay iframe {
-      width: 92%;
-      height: 90%;
-      border: none;
+    .iframe-controls button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Container fills screen below buttons */
+    #iframeContainer {
+      width: 95vw;
+      height: 82vh;
+      margin-top: 60px; /* Space for the top buttons */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #iframeContainer iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(255,215,120,0.2);
       border-radius: 18px;
       background: #000;
     }
@@ -292,6 +296,7 @@
   </div>
   <div id="iframeContainer"></div>
 </div>
+
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -317,7 +322,6 @@
 </script>
 
 <script>
-
 const searchInput = document.getElementById('search');
 const gameList = document.getElementById('gameList');
 const overlay = document.getElementById('iframeOverlay');
@@ -329,10 +333,9 @@ let currentIframe = null;
 
 function createFreshIframe() {
   iframeContainer.innerHTML = '';
-
   const iframe = document.createElement('iframe');
-  iframe.allow = 'fullscreen; autoplay; gamepad; pointer-lock';
-
+  // Permissions for modern games
+  iframe.allow = 'autoplay; fullscreen; gamepad; accelerometer; gyroscope; pointer-lock; microphone';
   iframeContainer.appendChild(iframe);
   currentIframe = iframe;
   return iframe;
@@ -370,8 +373,7 @@ fetch('https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/main/data/games
       `;
 
       card.querySelector('.play').addEventListener('click', () => {
-        overlay.style.display = 'flex';
-
+        overlay.style.display = 'flex'; // Uses flex to center content
         const iframe = createFreshIframe();
 
         fetch(game.src)
@@ -403,23 +405,34 @@ searchInput.addEventListener('input', () => {
 
 closeBtn.onclick = () => {
   overlay.style.display = 'none';
+  // Ensure audio stops by clearing src before removing
+  if (currentIframe) {
+    currentIframe.src = 'about:blank';
+  }
   iframeContainer.innerHTML = '';
   currentIframe = null;
 };
 
 fullscreenBtn.onclick = () => {
-  if (currentIframe?.requestFullscreen) {
-    currentIframe.requestFullscreen();
+  // Try to fullscreen the iframe directly, fallback to container
+  if (currentIframe) {
+    if (currentIframe.requestFullscreen) {
+      currentIframe.requestFullscreen();
+    } else if (currentIframe.webkitRequestFullscreen) {
+      currentIframe.webkitRequestFullscreen();
+    } else if (iframeContainer.requestFullscreen) {
+      iframeContainer.requestFullscreen();
+    }
   }
 };
 
+// Close when clicking empty black space (but not buttons)
 overlay.addEventListener('click', e => {
   if (e.target === overlay) closeBtn.onclick();
 });
 </script>
 
 <script>
-
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 let particlesArray = [];
