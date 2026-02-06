@@ -589,7 +589,7 @@
   },
   {
     "name": "Terraria",
-    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/669.html",
+    "src": "https://raw.githubusercontent.com/ten8mystery/Vertex-Gold/refs/heads/main/data/local/zones/terraria.html",
     "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/669.png",
     "description": "Game Active"
   },
@@ -1155,6 +1155,30 @@
     "name": "Hobo 6",
     "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/678.html",
     "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/678.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Hobo 6",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/678.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/678.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Five Nights at Freddy's: Sister Location",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/185.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/185.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Five Nights at Freddy's: Pizza Simulator",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/191.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/191.png",
+    "description": "Game Active"
+  },
+  {
+    "name": "Five Nights at Freddy's: Ultimate Custom Night",
+    "src": "https://cdn.jsdelivr.net/gh/gn-math/html@main/192.html",
+    "image": "https://cdn.jsdelivr.net/gh/gn-math/covers@main/192.png",
     "description": "Game Active"
   }
 ]
