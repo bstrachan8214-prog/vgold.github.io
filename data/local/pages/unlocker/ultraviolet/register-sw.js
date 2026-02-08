@@ -2,18 +2,16 @@
  * Distributed with Ultraviolet and compatible with most configurations.
  */
 
-// Changed from "uv-sw.js" to "/uv/uv.sw.js" to match your actual directory structure 
-// while ensuring it points to the correct JavaScript file.
-const stockSW = "/uv/uv.sw.js"; 
+// Point directly to the root where the file should be moved
+const stockSW = "/uv.sw.js"; 
 
 /**
- * List of hostnames that are allowed to run serviceworkers on http:
+ * List of hostnames allowed to run serviceworkers on http
  */
 const swAllowedHostnames = ["localhost", "127.0.0.1"];
 
 /**
- * Global util
- * Used in 404.html and index.html
+ * Global registration utility
  */
 async function registerSW() {
     if (
@@ -25,8 +23,7 @@ async function registerSW() {
     if (!navigator.serviceWorker)
         throw new Error("Your browser doesn't support service workers.");
 
-    // The 'Service-Worker-Allowed' header is often required if the SW is in a subfolder.
-    // However, the simplest fix is ensuring the path here is absolute from the root.
+    // Registering from the root fixes the "Max Scope Allowed" security error
     await navigator.serviceWorker.register(stockSW, {
         scope: __uv$config.prefix,
     });
