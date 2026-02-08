@@ -55,7 +55,6 @@
       width: 90%;
     }
 
-    /* Animated Gold Text */
     h1 {
       font-size: 2.2rem;
       font-weight: 900;
@@ -76,7 +75,6 @@
       font-weight: 500;
     }
 
-    /* Vertex Gold Style Spinner */
     .spinner-wrapper {
         position: relative;
         width: 80px;
@@ -212,9 +210,25 @@
     animate();
   </script>
 
-  <script src="uv/uv.bundle.js" defer></script>
-  <script src="uv/uv.config.js" defer></script>
-  <script src="register-sw.js" defer></script>
-  <script src="embed.js" defer></script>
+  <script src="/data/local/pages/unlocker/ultraviolet/uv/uv.bundle.js"></script>
+  <script src="/data/local/pages/unlocker/ultraviolet/uv/uv.config.js"></script>
+  <script src="register-sw.js"></script>
+  <script src="embed.js"></script>
+
+  <script>
+    (async function() {
+      try {
+        if (typeof BareMux !== 'undefined') {
+          const connection = new BareMux.BareMuxConnection('/uv-sw.js');
+          await connection.setTransport('/data/local/pages/unlocker/ultraviolet/uv/uv.bundle.js', [{ 
+            wisp: 'wss://glseries.net/wisp/' 
+          }]);
+          console.log("Vertex: Wisp Active");
+        }
+      } catch (e) {
+        console.error("Vertex: Connection Error", e);
+      }
+    })();
+  </script>
 </body>
 </html>
