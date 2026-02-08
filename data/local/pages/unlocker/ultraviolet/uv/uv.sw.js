@@ -1,5 +1,5 @@
-importScripts("/s/uv/uv.bundle.js");
-importScripts("/s/uv/uv.config.js");
+importScripts("/data/local/pages/unlocker/ultraviolet/uv/uv.bundle.js");
+importScripts("/data/local/pages/unlocker/ultraviolet/uv/uv.bundle.js/uv.config.js");
 
 class UVServiceWorker extends EventEmitter {
 	constructor(config = __uv$config) {
