@@ -19,9 +19,14 @@ async function registerSW() {
     )
         throw new Error("Service workers cannot be registered without https.");
 
-    if (!navigator.serviceWorker)
-        throw new Error("Your browser doesn't support service workers.");
-
+if ('serviceWorker' in navigator) {
+    // We register the root file, but tell it to watch the WHOLE site
+    navigator.serviceWorker.register('/uv-sw.js', {
+        scope: __uv$config.prefix // This ensures it watches the '/s/' path
+    }).then(() => {
+        console.log("Service Worker Registered to Scope:", __uv$config.prefix);
+    });
+}
     // Registering from the root fixes the "Max Scope Allowed" security error
     await navigator.serviceWorker.register(stockSW, {
         scope: __uv$config.prefix,
